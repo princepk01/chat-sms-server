@@ -8,7 +8,7 @@ public class ChatSmsServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ChatSmsServerApplication.class, args);
-		System.out.println("======main medthod completed=====");
+		System.out.println("======main medthod completed=====");   
 	}
 
 }
