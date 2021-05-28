@@ -15,4 +15,8 @@ public interface UserBusiness {
 	public boolean deleteUserById(Integer id);
 
 	public User getUserByUserUniqueId(String userUniqueId);
+
+	public User getUserByMobileNumber(String mobileNumber);
+
+	public User getUserByEmail(String email);
 }

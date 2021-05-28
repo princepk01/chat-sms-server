@@ -41,4 +41,15 @@ public class UserBusinessImpl implements UserBusiness{
 		return userRepository.findByUserUniqueId(userId);
 	}
 
+	@Override
+	public User getUserByMobileNumber(String mobileNumber) {
+		
+		return userRepository.findByMobileNumber(mobileNumber);
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		
+		return userRepository.findByEmail(email);
+	}
 }

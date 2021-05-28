@@ -15,4 +15,6 @@ public interface UserService {
 	public boolean deleteUserById(Integer id);
 
 	public User getUserByUserUniqueId(String userUniqueId);
+
+	public String loginUser(String userName, String password);
 }

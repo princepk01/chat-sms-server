@@ -1,5 +1,6 @@
 package com.sms.server.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -15,7 +16,10 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "SMS")
-public class Sms {
+public class Sms implements Serializable {
+
+	private static final long serialVersionUID = 8659226284080129930L;
+
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +30,7 @@ public class Sms {
 	private String message;
 	@Column(name = "MESSAGE_TIME")
 	private String messageTime;
-    @CreationTimestamp
+	@CreationTimestamp
 	@Column(name = "CREATED_DATE", updatable = false)
 	private LocalDateTime createdDate;
 	@ManyToOne

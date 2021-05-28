@@ -1,7 +1,9 @@
 package com.sms.server.converter;
 
+import com.sms.server.entity.ScheduleMeeting;
 import com.sms.server.entity.Sms;
 import com.sms.server.entity.User;
+import com.sms.server.model.ScheduleMeetingModel;
 import com.sms.server.model.SmsModel;
 import com.sms.server.model.UserModel;
 import com.sms.server.util.ChatSmsUtil;
@@ -14,7 +16,7 @@ public class ModelToJpaConverter {
 			user = new User();
 			user.setId(userModel.getId());
 			if (user.getId() == null || user.getId() == 0) {
-				String userId = ChatSmsUtil.getUserId();
+				String userId = ChatSmsUtil.getUniqueUserId();
 				user.setUserUniqueId(userId);
 			} else {
 				user.setUserUniqueId(userModel.getUserUniqueId());
@@ -38,11 +40,27 @@ public class ModelToJpaConverter {
 			sms.setUserUniqueId(smsModel.getUserUniqueId());
 			sms.setMessage(smsModel.getMessage());
 			sms.setMessageTime(ChatSmsUtil.getMessageTime());
-			User user = new User();
-			user.setId(smsModel.getUserId());
-			sms.setUser(user);
+			sms.setUser(ChatSmsUtil.getUserObject(smsModel.getUserId()));
 		}
 		return sms;
+	}
+
+	public static ScheduleMeeting getScheduleMeetingJpaObject(ScheduleMeetingModel scheduleMeetingModel) {
+
+		ScheduleMeeting scheduleMeeting = null;
+
+		if (scheduleMeetingModel != null) {
+			scheduleMeeting = new ScheduleMeeting();
+			scheduleMeeting.setId(scheduleMeetingModel.getId());
+			scheduleMeeting.setMeetingUniqueId(scheduleMeetingModel.getMeetingUniqueId());
+			scheduleMeeting.setScheduleMeetingUrl(scheduleMeetingModel.getScheduleMeetingUrl());
+			scheduleMeeting.setUser(ChatSmsUtil.getUserObject(scheduleMeetingModel.getUserId()));
+			scheduleMeeting.setTopic(scheduleMeetingModel.getTopic());
+			scheduleMeeting.setTopicDescription(scheduleMeetingModel.getTopicDescription());
+			scheduleMeeting.setTopicDateTime(scheduleMeetingModel.getTopicDateTime());
+			scheduleMeeting.setTopicDuration(scheduleMeetingModel.getTopicDuration());
+		}
+		return scheduleMeeting;
 	}
 
 }

@@ -41,6 +41,9 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Sms> userSmsList;
 	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<ScheduleMeeting> scheduleMeetingList;
+	
 	public Integer getId() {
 		return id;
 	}

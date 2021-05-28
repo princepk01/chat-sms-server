@@ -40,4 +40,29 @@ public class UserServiceImpl implements UserService {
 		return userBusiness.getUserByUserUniqueId(userUniqueId);
 	}
 
+	@Override
+	public String loginUser(String userName, String password) {
+		String userUniqueId = null;
+		User user = userBusiness.getUserByMobileNumber(userName);
+		if (user != null) {
+			userUniqueId = validateLoginUser(user, userName, password);
+		} else {
+			user = userBusiness.getUserByEmail(userName);
+			if (user != null) {
+				userUniqueId = validateLoginUser(user, userName, password);
+			}
+		}
+		return userUniqueId;
+	}
+
+	private String validateLoginUser(User user, String userName, String password) {
+		String userUniqueId = null;
+
+		if (userName.equalsIgnoreCase(user.getEmail()) && password.equalsIgnoreCase(user.getPassword())) {
+			userUniqueId = user.getUserUniqueId();
+		} else if (userName.equalsIgnoreCase(user.getMobileNumber()) && password.equalsIgnoreCase(user.getPassword())) {
+			userUniqueId = user.getUserUniqueId();
+		}
+		return userUniqueId;
+	}
 }
